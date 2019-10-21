@@ -1,0 +1,18 @@
+INICIO:
+	MOVi R1, #10	-- R0 <- 10
+	ADDi R1, #1 	-- R1 = R1+1
+	STR DSP0, R0	-- Mostra no display
+	CMPi R0, #F0	-- Compara R0 com 240
+	JNE .INICIO	-- Senão for igual, pula INICIO
+LUIZERA:
+	MOVi R1, #10	-- R0 <- 10
+	ADDi R1, #1 	-- R1 = R1+1
+	STR DSP0, R0	-- Mostra no display
+	CMPi R0, #F0	-- Compara R0 com 240
+	JNE .LUIZERA	-- Senão for igual, pula Lui
+XICO:
+	MOVi R1, #10	-- R0 <- 10
+	ADDi R1, #1 	-- R1 = R1+1
+	STR DSP0, R0	-- Mostra no display
+	CMPi R0, #F0	-- Compara R0 com 240
+	JNE .XICO	-- Senão for igual, pula INICIO
