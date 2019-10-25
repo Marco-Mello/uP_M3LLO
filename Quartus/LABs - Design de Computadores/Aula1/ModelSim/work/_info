@@ -1,0 +1,93 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA_lite/18.1
+Etb_ula
+Z0 w1571073630
+Z1 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z4 dC:/Users/MarcoASMA/Desktop/LABs - Design de Computadores/Aula1/ModelSim
+Z5 8C:\Users\MarcoASMA\Desktop\LABs - Design de Computadores\Aula1\ModelSim\tb_ULA.vhd
+Z6 FC:\Users\MarcoASMA\Desktop\LABs - Design de Computadores\Aula1\ModelSim\tb_ULA.vhd
+l0
+L8
+VOETDRa=am^ib^9DY3LXFc0
+!s100 UYWKE^EkIB82@IdehjThP0
+Z7 OV;C;10.5b;63
+32
+Z8 !s110 1571073632
+!i10b 1
+Z9 !s108 1571073631.000000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:\Users\MarcoASMA\Desktop\LABs - Design de Computadores\Aula1\ModelSim\tb_ULA.vhd|
+Z11 !s107 C:\Users\MarcoASMA\Desktop\LABs - Design de Computadores\Aula1\ModelSim\tb_ULA.vhd|
+!i113 1
+Z12 o-work work -2002 -explicit
+Z13 tExplicit 1 CvgOpt 0
+Aarch_tb_ula
+Z14 DEx4 work 3 ula 0 22 :ZBCf>8?U<35BcW;9mc^80
+R1
+R2
+R3
+DEx4 work 6 tb_ula 0 22 OETDRa=am^ib^9DY3LXFc0
+l17
+L10
+V`zfFXjOWoDSCnOn9blO6C2
+!s100 RdG]NVA`>k5`X@F@N90mf3
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Eula
+Z15 w1571071997
+R1
+R2
+R3
+R4
+Z16 8C:\Users\MarcoASMA\Desktop\LABs - Design de Computadores\Aula1\ModelSim\ULA.vhd
+Z17 FC:\Users\MarcoASMA\Desktop\LABs - Design de Computadores\Aula1\ModelSim\ULA.vhd
+l0
+L6
+V:ZBCf>8?U<35BcW;9mc^80
+!s100 3U?T2M^<E4I>MRmEK5CSg3
+R7
+32
+Z18 !s110 1571071999
+!i10b 1
+Z19 !s108 1571071999.000000
+Z20 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:\Users\MarcoASMA\Desktop\LABs - Design de Computadores\Aula1\ModelSim\ULA.vhd|
+Z21 !s107 C:\Users\MarcoASMA\Desktop\LABs - Design de Computadores\Aula1\ModelSim\ULA.vhd|
+!i113 1
+R12
+R13
+Aarc_ula
+R1
+R2
+R3
+R14
+l23
+L19
+VLECFGi>[gbnmfz6zU:aP>1
+!s100 fCCPnbWmzdmc_F929zH2a2
+R7
+32
+R18
+!i10b 1
+R19
+R20
+R21
+!i113 1
+R12
+R13
