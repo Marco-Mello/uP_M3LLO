@@ -1,18 +1,22 @@
-INICIO: --- fwefew
-	MOVi R1, #10	--R0 <- 10
-	ADDi R1, #1	--R1 = R1+1
-	STORE DSP0, R0	--Mostra no display
-	CMPi R0, #F0	--Compara R0 com 240
-	JNE .FIM	--Pula FIM
-MEIO:  ----- dwefwe
-	MOVi R1, #10	--
-	ADDi R1, #1	-- R1 = R1+1
+ZERO:
+	MOVi R0, #10	-- R0 <- 10
+	MOVi R2, #10	--
+	MOVi R1, #10	-- R0 <- 10	
+
+INICIO:
+	ADDi R0, #1	-- R1 = R1+1
 	STORE DSP0, R0	-- Mostra no display
 	CMPi R0, #F0	-- Compara R0 com 240
-	JNE .INICIO	-- Senão for igual, pula INICIO
-FIM:   ------- fwefwwfe
-	MOVi R1, #10	-- R0 <- 10
+	JNE .FIM	-- Pula FIM
+
+MEIO:
+	ADDi R2, #1	-- R1 = R1+1
+	STORE DSP2, R0	-- Mostra no display
+	CMPi R2, #F0	-- Compara R0 com 240
+	JMP .ZERO	-- Senão for igual, pula INICIO
+
+FIM:
 	ADDi R1, #1	-- R1 = R1+1
-	STORE DSP0, R0	-- Mostra no display
-	CMPi R0, #F0	-- Compara R0 com 240
+	STORE DSP1, R1	-- Mostra no display
+	CMPi R1, #F0	-- Compara R0 com 240
 	JNE .MEIO	-- Senão for igual, pula MEIO

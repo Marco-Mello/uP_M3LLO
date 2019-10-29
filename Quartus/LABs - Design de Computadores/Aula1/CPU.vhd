@@ -33,24 +33,39 @@ signal imediatoJMP : std_logic_vector(11 downto 0);
 signal sigInB : std_logic_vector(7 downto 0);
 signal sigInC : std_logic_vector(7 downto 0);
 signal sigOutMuxInCULA : std_logic_vector(7 downto 0);
-signal sigOutA : std_logic_vector(7 downto 0);
+signal sigOutMuxInBULA : std_logic_vector(7 downto 0);
+signal sigOutULA : std_logic_vector(7 downto 0);
 --################################################
 
 
---========= Somador / MuxPC / PC / ROM ===========
+--========= Somador / MuxPC / PC / ROM / MUXInBULA  ===========
 signal sigAdress : std_logic_vector(11 downto 0);
 signal sigOutSomador : std_logic_vector(11 downto 0);
 signal sigOutMuxPC : std_logic_vector(11 downto 0);
+signal sigOutMuxBANCO : std_logic_vector(7 downto 0);
+
 --################################################
+
 
 
 --========= UNIDADE de CONTROLE ===========
 signal sigFlagIgual : std_logic;
 signal sigFlagCarry : std_logic;
 signal sigSELMuxPC : std_logic;
+signal sigSELMuxBANCO : std_logic;
 signal sigWriteEnable : std_logic;
 signal sigSELMuxInC : std_logic;
+signal sigSELMuxInB : std_logic;
+signal sigSELFuncULA : std_logic_vector(3 downto 0);
+signal sigOutRead : std_logic;
+signal sigOutWrite : std_logic;
 --################################################
+
+
+--========= EXTERNAL ===========
+signal sigDADOin : std_logic_vector(7 downto 0);
+--################################################
+
 
 begin
 
@@ -61,13 +76,25 @@ RC <= sigOpcode(3 downto 0);
 imediatoDADO <= sigOpcode(7 downto 0);
 imediatoJMP <= sigOpcode(11 downto 0);
 
+sigDADOin <= dataIn;
+adress <= imediatoDADO;
+dataOut <= sigOutULA;
+readEnable <= sigOutRead;
+writeEnable <= sigOutWrite;
+
 unidadecontrole : entity work.UNIDADECONTROLE
 	port map(
 			instrucao => instrucao,
 			inFlagIgual => sigFlagIgual,
-			inFlagCarry => sigFlagCarry,
+			inFlagCarry => sigFlagCarry,			
+			OutMuxPC => sigSELMuxPC,
+			OutMuxBanco => sigSELMuxBANCO,
+			OutWriteEnableBanco => sigWriteEnable,
+			OutMuxInBULA => sigSELMuxInB,
 			OutMuxInCULA => sigSELMuxInC,
-			OutMuxPC => sigSELMuxPC	
+			OutFuncULA => sigSELFuncULA,
+			OutRead => sigOutRead,
+			OutWrite => sigOutWrite
 	);
 	
 
@@ -104,12 +131,23 @@ muxPC : entity work.MUX2_1
 	
 ula : entity work.ULA
 	port map(
-			inB => sigInB,
+			inB => sigOutMuxInBULA,
 			inC => sigOutMuxInCULA,
-			instrucao => instrucao,
-			outA => sigOutA,
+			instrucao => sigSELFuncULA,
+			outA => sigOutULA,
 			flagIgual => sigFlagIgual,
 			flagCarry => sigFlagCarry
+	);
+	
+muxInBULA : entity work.MUX2_1
+	generic map(
+			tamanho_qdtBits => 8
+	)
+	port map(
+			inA => sigDADOin,
+			inB => sigInB,
+			sel => sigSELMuxInB,
+			outMux => sigOutMuxInBULA
 	);
 	
 muxInCULA : entity work.MUX2_1
@@ -123,6 +161,17 @@ muxInCULA : entity work.MUX2_1
 			outMux => sigOutMuxInCULA
 	);
 	
+muxBANCO : entity work.MUX2_1
+	generic map(
+			tamanho_qdtBits => 8
+	)
+	port map(
+			inA => imediatoDADO,
+			inB => sigOutULA,
+			sel => sigSELMuxBANCO,
+			outMux => sigOutMuxBANCO
+	);
+	
 banco : entity work.BANCO
 	port map(
 		clk => clk,
@@ -131,7 +180,7 @@ banco : entity work.BANCO
 		dataB => sigInB,
 		dataC => sigInC,
 		addressA => RA,
-		dataA => sigOutA,
+		dataA => sigOutMuxBANCO,
 		writeEnable => sigWriteEnable
 	);
 

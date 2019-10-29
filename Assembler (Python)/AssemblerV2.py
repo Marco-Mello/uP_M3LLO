@@ -7,18 +7,20 @@ Criado em 24/Outubro/2019
 
 import re #remover espaços em brancos e tabs
 import numpy as np
-import sys
-sys.path.append('../DICIONARIOS/M3LLOReservedV1.py')
+from M3LLOReservadoV1 import *
 
 assembly = 'ASM.txt'
-destino = 'BIN.txt'
+destinoBIN = 'BIN.txt'
+destinoMIF = 'InitROM.mif'
 
-count = 0
+genMIF = 0
 
-Labels = {}
+
 
 with open(assembly) as f:
-    with open(destino, "w") as f1:
+    count = 0
+    Labels = {}
+    with open(destinoBIN, "w") as f1:
         for line in f:
             count = count+1
             if '-' in line:
@@ -51,30 +53,34 @@ f.close()
 f1.close()
 
 ############################INICIO DE CONVERSAO PARA BINARIO##############
-with open(destino, "r") as f:
-    lines = f.readlines()
-    with open(destino, "w") as f:
-        for line in lines:  
-            if '.' in line:
-                line = re.sub('[\n]','',line)
-                line = re.sub('[.]','',line)
+if genMIF == 0 :
+    with open(destinoBIN, "r") as f:
+        lines = f.readlines()
+        with open(destinoBIN, "w") as f:
+            for line in lines:  
+                if '.' in line:
+                    line = re.sub('[\n]','',line)
+                    line = re.sub('[.]','',line)
+                    line = re.split(',',line)
+                    line[1] = Labels[line[1]]
+                    line = ','.join(line)
+    
+                line = re.sub('\n','',line)
                 line = re.split(',',line)
-                line[1] = Labels[line[1]]
-                line = ','.join(line)
-
-            line = re.sub('\n','',line)
-            line = re.split(',',line)
-
-            for i in range (0,len(line)):
-                if line[i] in Reserved:
-                    line[i] = Reserved[line[i]]
-                else:
-                    print(len(line))
-                    if(len(line) == 2):
-                        line[i] = str(np.binary_repr(int(line[i],16))).zfill(12)
+    
+                for i in range (0,len(line)):
+                    if line[i] in Reserved:
+                        line[i] = Reserved[line[i]]
                     else:
-                        line[i] = str(np.binary_repr(int(line[i],16))).zfill(8)
-            line = ''.join(line)
-            f.write(line+'\n')          
-f.close()
+                        print(len(line))
+                        if(len(line) == 2):
+                            line[i] = str(np.binary_repr(int(line[i],16))).zfill(12)
+                        else:
+                            line[i] = str(np.binary_repr(int(line[i],16))).zfill(8)
+                line = ''.join(line)
+                f.write(line+'\n')          
+    f.close()
 ################========================================##################
+    
+
+
